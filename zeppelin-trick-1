@@ -1,0 +1,23 @@
+%python
+selections = ["1", "2", "3", "4", "5"]
+selections_str = str(selections)
+
+angular_script = """
+%angular
+<script type="text/javascript">
+    var element = $("#selection-form");
+    var scope = angular.element(element.parent(".ng-scope")).scope().compiledScope;
+    
+    // pass the variable to JavaScript by string interpolation
+    var selections = {selections_str};
+    // Bind the value to selections in angular;
+    scope.selections = selections;
+</script>
+
+<form class="form-inline" ng-app="iput" id="selection-form">
+    <label for="selection">Selections: </label>
+    <select type="text" class="form-control" id="selection" placeholder="" ng-model="selection" ng-options="o as o for o in selections">
+</form>
+""".format(selections_str=selections_str)
+
+print(angular_script)
